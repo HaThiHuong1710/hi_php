@@ -1,0 +1,373 @@
+<?php
+class Rectangle {
+    private $length;
+    private $width;
+
+    public function __construct($length, $width) {
+        $this->length = $length;
+        $this->width = $width;
+    }
+
+    public function calculateArea() {
+        return $this->length * $this->width;
+    }
+
+    public function calculatePerimeter() {
+        return 2 * ($this->length + $this->width);
+    }
+}
+$length = '5';
+$width = '6';
+$rectangle = new Rectangle($length, $width);
+echo "Area of rectangle:" . $rectangle->calculateArea() . "\n";
+echo "Perimeter of rectangle:" . $rectangle->calculatePerimeter();
+?>
+ 51 changes: 51 additions & 0 deletions51  
+ex10.php
+@@ -0,0 +1,51 @@
+<?php
+class HotelBooking {
+    private $name;
+    private $checkInDate;
+    private $numOfNights;
+    private $roomPrice;
+
+    public function __construct($name, $checkInDate, $numOfNights, $roomPrice) {
+        $this->name = $name;
+        $this->checkInDate = $checkInDate;
+        $this->numOfNights = $numOfNights;
+        $this->roomPrice = $roomPrice;
+    }
+
+    public function calculateTotalPayment() {
+        return $this->numOfNights * $this->roomPrice;
+    }
+
+    public function getName() {
+        return $this->name;
+    }
+
+    public function getCheckInDate() {
+        return $this->checkInDate;
+    }
+
+    public function getNumOfNights() {
+        return $this->numOfNights;
+    }
+
+    public function getRoomPrice() {
+        return $this->roomPrice;
+    }
+}
+
+$name = "Nguyen Giang";
+$checkInDate = "2023-07-05";
+$numOfNights = 3;
+$roomPrice = 100;
+
+$booking = new HotelBooking($name, $checkInDate, $numOfNights, $roomPrice);
+
+echo "Customer: " . $booking->getName() . "\n";
+echo "Check-in Date: " . $booking->getCheckInDate() . "\n";
+echo "Number of Nights: " . $booking->getNumOfNights() . "\n";
+echo "Room Price: $" . $booking->getRoomPrice() . "\n";
+echo "Total Payment: $" . $booking->calculateTotalPayment();
+?>
+
+
+
+ 21 changes: 21 additions & 0 deletions21  
+ex2.php
+@@ -0,0 +1,21 @@
+<?php
+class Point {
+    private $x;
+    private $y;
+
+    public function __construct($x, $y) {
+        $this->x = $x;
+        $this->y = $y;
+    }
+
+    public function calculateDistance($otherPoint) {
+        $deltaX = $otherPoint->x - $this->x;
+        $deltaY = $otherPoint->y - $this->y;
+        return sqrt($deltaX * $deltaX + $deltaY * $deltaY);
+    }
+}
+$point1 = new Point(6, 9);
+$point2 = new Point(2, 1);
+
+echo "Distance: " . $point1->calculateDistance($point2) . "\n";
+?>
+ 32 changes: 32 additions & 0 deletions32  
+ex3.php
+@@ -0,0 +1,32 @@
+<?php
+class IntegerArray {
+    private $number;
+
+    public function __construct($number){
+        $this->number = $number;
+    }
+
+    public function calculateSum(){
+        return array_sum($this->number);
+    }
+
+    public function calculateAverage(){
+        $count = count($this->number);
+        if($count === 0){
+            return 0;
+        }
+        return $this->calculateSum() / $count;
+    }
+
+    public function findMaximum(){
+        return max($this->number);
+    }
+}
+
+$array = [2,4,6,8];
+$integerArray = new IntegerArray($array);
+
+echo "Sum = " . $integerArray->calculateSum() . "\n";
+echo "Average = " . $integerArray->calculateAverage() . "\n";
+echo "Maximum = " . $integerArray->findMaximum();
+?>
+ 46 changes: 46 additions & 0 deletions46  
+ex4.php
+@@ -0,0 +1,46 @@
+<?php
+class Clock {
+    private $hour;
+    private $minute;
+    private $second;
+
+    public function __construct($hour, $minute, $second) {
+        $this->hour = $hour;
+        $this->minute = $minute;
+        $this->second = $second;
+    }
+
+    public function displayTime() {
+        return sprintf("%02d:%02d:%02d", $this->hour, $this->minute, $this->second);
+    }
+
+    public function incrementSecond() {
+        $this->second++;
+        if ($this->second >= 60) {
+            $this->second = 0;
+            $this->incrementMinute();
+        }
+    }
+
+    private function incrementMinute() {
+        $this->minute++;
+        if ($this->minute >= 60) {
+            $this->minute = 0;
+            $this->incrementHour();
+        }
+    }
+
+    private function incrementHour() {
+        $this->hour++;
+        if ($this->hour >= 24) {
+            $this->hour = 0;
+        }
+    }
+}
+
+$clock = new Clock(14, 30, 30);
+echo "Current time: " . $clock->displayTime() . "\n";
+$clock->incrementSecond();
+echo "Updated time: " . $clock->displayTime();
+
+?>
+ 51 changes: 51 additions & 0 deletions51  
+ex5.php
+@@ -0,0 +1,51 @@
+<?php
+class Student {
+    private $studentID;
+    private $firstName;
+    private $lastName;
+
+    public function __construct($studentID, $firstName, $lastName) {
+        $this->studentID = $studentID;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
+    }
+
+    public function getStudentID() {
+        return $this->studentID;
+    }
+
+    public function getFullName() {
+        return $this->firstName . " " . $this->lastName;
+    }
+}
+
+class StudentList {
+    private $students;
+
+    public function __construct() {
+        $this->students = [];
+    }
+
+    public function addStudent($student) {
+        $this->students[] = $student;
+    }
+
+    public function displayStudents() {
+        foreach ($this->students as $student) {
+            echo "Student ID: " . $student->getStudentID() . "\n";
+            echo "Full Name: " . $student->getFullName() . "\n\n";
+        }
+    }
+}
+
+$studentList = new StudentList();
+
+$student1 = new Student(1, "Giang", "Nguyen");
+$student2 = new Student(2, "Anh", "Nguyen");
+
+$studentList->addStudent($student1);
+$studentList->addStudent($student2);
+
+$studentList->displayStudents();
+
+?>
+ 21 changes: 21 additions & 0 deletions21  
+ex6.php
+@@ -0,0 +1,21 @@
+<?php
+class Car {
+    private $brand;
+    private $color;
+    private $year;
+
+    public function __construct($brand, $color, $year) {
+        $this->brand = $brand;
+        $this->color = $color;
+        $this->year = $year;
+    }
+
+    public function displayCarInfo() {
+        return "Brand: " . $this->brand . "\n" . "Color: " . $this->color . "\n" . "Year: " . $this->year;
+    }
+}
+
+$car = new Car("Honda", "Black", 2022);
+echo $car->displayCarInfo();
+
+?>
+ 58 changes: 58 additions & 0 deletions58  
+ex7.php
+@@ -0,0 +1,58 @@
+<?php
+class Fraction {
+    private $numerator;
+    private $denominator;
+
+    public function __construct($numerator, $denominator) {
+        $this->numerator = $numerator;
+        $this->denominator = $denominator;
+    }
+
+    public function add($otherFraction) {
+        $resultNumerator = ($this->numerator * $otherFraction->denominator) + ($this->denominator * $otherFraction->numerator);
+        $resultDenominator = $this->denominator * $otherFraction->denominator;
+        return new Fraction($resultNumerator, $resultDenominator);
+    }
+
+    public function subtract($otherFraction) {
+        $resultNumerator = ($this->numerator * $otherFraction->denominator) - ($this->denominator * $otherFraction->numerator);
+        $resultDenominator = $this->denominator * $otherFraction->denominator;
+        return new Fraction($resultNumerator, $resultDenominator);
+    }
+
+    public function multiply($otherFraction) {
+        $resultNumerator = $this->numerator * $otherFraction->numerator;
+        $resultDenominator = $this->denominator * $otherFraction->denominator;
+        return new Fraction($resultNumerator, $resultDenominator);
+    }
+
+    public function divide($otherFraction) {
+        $resultNumerator = $this->numerator * $otherFraction->denominator;
+        $resultDenominator = $this->denominator * $otherFraction->numerator;
+        return new Fraction($resultNumerator, $resultDenominator);
+    }
+
+    public function getNumerator() {
+        return $this->numerator;
+    }
+
+    public function getDenominator() {
+        return $this->denominator;
+    }
+}
+
+$frac1 = new Fraction(1, 2);
+$frac2 = new Fraction(3, 4);
+
+$result = $frac1->add($frac2);
+echo "Addition: " . $result->getNumerator() . "/" . $result->getDenominator() . "\n";
+
+$result = $frac1->subtract($frac2);
+echo "Subtraction: " . $result->getNumerator() . "/" . $result->getDenominator() . "\n";
+
+$result = $frac1->multiply($frac2);
+echo "Multiplication: " . $result->getNumerator() . "/" . $result->getDenominator() . "\n";
+
+$result = $frac1->divide($frac2);
+echo "Division: " . $result->getNumerator() . "/" . $result->getDenominator();
+?>
+ 21 changes: 21 additions & 0 deletions21  
+ex8.php
+@@ -0,0 +1,21 @@
+<?php
+class Person {
+    private $name;
+    private $age;
+    private $address;
+
+    public function __construct($name, $age, $address) {
+        $this->name = $name;
+        $this->age = $age;
+        $this->address = $address;
+    }
+
+    public function displayInfo() {
+        return "Name: " . $this->name . "\n" . "Age: " . $this->age . "\n" . "Address: " . $this->address;
+    }
+}
+
+$person = new Person("Anh Nguyen", 20, "87 DKT");
+echo $person->displayInfo();
+
+?>
+ 21 changes: 21 additions & 0 deletions21  
+ex9.php
+@@ -0,0 +1,21 @@
+<?php
+class Product {
+    private $name;
+    private $price;
+    private $description;
+
+    public function __construct($name, $price, $description) {
+        $this->name = $name;
+        $this->price = $price;
+        $this->description = $description;
+    }
+
+    public function displayProductInfo() {
+        return "Name: " . $this->name . "\n" . "Price: $" . $this->price . "\n" . "Description: " . $this->description;
+    }
+}
+
+$product = new Product("Mango", 50.00, "Description ...");
+echo $product->displayProductInfo();
+
+?>
